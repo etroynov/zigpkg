@@ -1,21 +1,31 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { locales, localizeHref } from '$lib/paraglide/runtime';
-	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
+  import { page } from "$app/state";
+  import { locales, localizeHref } from "$lib/paraglide/runtime";
+  import favicon from "$lib/assets/favicon.svg";
+  import { Header, Footer } from "$lib/components";
 
-	let { children } = $props();
+  import "./layout.css";
+
+  let { children } = $props();
 </script>
 
-<svelte:head><link rel="icon" href={favicon} /></svelte:head>
+<svelte:head>
+  <link rel="icon" href={favicon} />
+  <title>zigpkg - The package manager for Zig</title>
+</svelte:head>
 
-{@render children()}
+<div class="min-h-screen flex flex-col">
+  <Header />
+  <main class="container mx-auto flex-1">
+    {@render children()}
+  </main>
+  <Footer />
+</div>
+
 <div style="display:none">
-	{#each locales as locale}
-		<a
-			href={localizeHref(page.url.pathname, { locale })}
-		>
-			{locale}
-		</a>
-	{/each}
+  {#each locales as locale}
+    <a href={localizeHref(page.url.pathname, { locale })}>
+      {locale}
+    </a>
+  {/each}
 </div>
