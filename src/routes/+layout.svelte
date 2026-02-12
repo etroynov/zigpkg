@@ -14,7 +14,7 @@
   <title>zigpkg - The package manager for Zig</title>
 </svelte:head>
 
-<div class="min-h-screen flex flex-col">
+<div class="min-h-screen flex flex-col bg-[#fafafa]">
   <Header />
   <main class="container mx-auto flex-1">
     {@render children()}

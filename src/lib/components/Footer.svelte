@@ -1,28 +1,132 @@
 <script lang="ts">
-	const links = {
-		about: [
-			{ label: 'About', href: '/about' },
-			{ label: 'Blog', href: '/blog' },
-			{ label: 'Status', href: '/status' }
-		],
-		resources: [
-			{ label: 'Documentation', href: '/docs' },
-			{ label: 'API', href: '/docs/api' },
-			{ label: 'CLI', href: '/docs/cli' }
-		],
-		community: [
-			{ label: 'GitHub', href: 'https://github.com/zigpkg' },
-			{ label: 'Discord', href: 'https://discord.gg/zig' },
-			{ label: 'Twitter', href: 'https://twitter.com/zigpkg' }
-		],
-		legal: [
-			{ label: 'Terms', href: '/terms' },
-			{ label: 'Privacy', href: '/privacy' },
-			{ label: 'Code of Conduct', href: '/code-of-conduct' }
-		]
-	};
+  const links = {
+    community: [
+      { label: "Discord", href: "https://discord.gg/zig" },
+      { label: "Twitter", href: "https://twitter.com/zigpkg" },
+      { label: "GitHub", href: "https://github.com/zigpkg" },
+    ],
+    resources: [
+      { label: "Documentation", href: "/docs" },
+      { label: "Blog", href: "/blog" },
+      { label: "Design Kit", href: "#" },
+    ],
+    ecosystem: [
+      { label: "Packages", href: "/" },
+      { label: "Release Notes", href: "#" },
+      { label: "Jobs", href: "#" },
+    ],
+    legal: [
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
+      { label: "Cookie Policy", href: "#" },
+    ],
+  };
 </script>
 
+<!-- Detailed Footer -->
+<footer class="border-t border-gray-200 bg-white pt-16 pb-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+      <!-- Column 1 -->
+      <div>
+        <h4 class="font-bold text-slate-900 mb-4">Community</h4>
+        <ul class="space-y-3 text-sm text-slate-500">
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors"
+              >Discord</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors"
+              >Twitter</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors"
+              >GitHub</a
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- Column 2 -->
+      <div>
+        <h4 class="font-bold text-slate-900 mb-4">Resources</h4>
+        <ul class="space-y-3 text-sm text-slate-500">
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors"
+              >Documentation</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors">Blog</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors"
+              >Design Kit</a
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- Column 3 -->
+      <div>
+        <h4 class="font-bold text-slate-900 mb-4">Ecosystem</h4>
+        <ul class="space-y-3 text-sm text-slate-500">
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors"
+              >Packages</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors"
+              >Release Notes</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors">Jobs</a>
+          </li>
+        </ul>
+      </div>
+      <!-- Column 4 -->
+      <div>
+        <h4 class="font-bold text-slate-900 mb-4">Legal</h4>
+        <ul class="space-y-3 text-sm text-slate-500">
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors"
+              >Privacy Policy</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors"
+              >Terms of Service</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-yellow-600 transition-colors"
+              >Cookie Policy</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="border-t border-gray-100 pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-slate-400"
+    >
+      <p>© 2026 ZigPkg. All rights reserved.</p>
+      <div class="flex items-center gap-2 mt-4 md:mt-0">
+        <span>Made with</span>
+        <svg class="w-4 h-4 text-red-500 fill-current" viewBox="0 0 24 24"
+          ><path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+          /></svg
+        >
+        <span>for zig community</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- 
 <footer class="border-t bg-muted/30">
 	<div class="container mx-auto px-4 py-12">
 		<div class="grid grid-cols-2 md:grid-cols-5 gap-8">
@@ -101,4 +205,4 @@
 			</p>
 		</div>
 	</div>
-</footer>
+</footer> -->
