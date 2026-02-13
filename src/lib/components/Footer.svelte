@@ -37,14 +37,14 @@
             >
           </li>
           <li>
-            <a href="#" class="hover:text-yellow-600 transition-colors"
-              >Twitter</a
-            >
+            <a href="#" class="hover:text-yellow-600 transition-colors">
+              Twitter
+            </a>
           </li>
           <li>
-            <a href="#" class="hover:text-yellow-600 transition-colors"
-              >GitHub</a
-            >
+            <a href="https://github.com/zig-toolbelt" class="hover:text-yellow-600 transition-colors">
+              GitHub
+            </a>
           </li>
         </ul>
       </div>
@@ -53,17 +53,12 @@
         <h4 class="font-bold text-slate-900 mb-4">Resources</h4>
         <ul class="space-y-3 text-sm text-slate-500">
           <li>
-            <a href="#" class="hover:text-yellow-600 transition-colors"
-              >Documentation</a
-            >
+            <a href="/docs" class="hover:text-yellow-600 transition-colors">
+              Documentation
+            </a>
           </li>
           <li>
-            <a href="#" class="hover:text-yellow-600 transition-colors">Blog</a>
-          </li>
-          <li>
-            <a href="#" class="hover:text-yellow-600 transition-colors"
-              >Design Kit</a
-            >
+            <a href="/blog" class="hover:text-yellow-600 transition-colors">Blog</a>
           </li>
         </ul>
       </div>
@@ -72,17 +67,9 @@
         <h4 class="font-bold text-slate-900 mb-4">Ecosystem</h4>
         <ul class="space-y-3 text-sm text-slate-500">
           <li>
-            <a href="#" class="hover:text-yellow-600 transition-colors"
-              >Packages</a
-            >
-          </li>
-          <li>
-            <a href="#" class="hover:text-yellow-600 transition-colors"
-              >Release Notes</a
-            >
-          </li>
-          <li>
-            <a href="#" class="hover:text-yellow-600 transition-colors">Jobs</a>
+            <a href="#" class="hover:text-yellow-600 transition-colors">
+              Packages
+            </a>
           </li>
         </ul>
       </div>
@@ -91,9 +78,9 @@
         <h4 class="font-bold text-slate-900 mb-4">Legal</h4>
         <ul class="space-y-3 text-sm text-slate-500">
           <li>
-            <a href="#" class="hover:text-yellow-600 transition-colors"
-              >Privacy Policy</a
-            >
+            <a href="#" class="hover:text-yellow-600 transition-colors">
+              Privacy Policy
+            </a>
           </li>
           <li>
             <a href="#" class="hover:text-yellow-600 transition-colors"
