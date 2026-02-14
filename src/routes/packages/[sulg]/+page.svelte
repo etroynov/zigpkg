@@ -12,6 +12,7 @@
 </script>
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
   <div class="mb-6">
     <div class="flex flex-wrap items-center gap-3 mb-2">
       <a href="/packages" class="text-sm text-slate-400 hover:text-yellow-600 transition-colors flex items-center gap-1">
@@ -271,7 +272,7 @@ pub fn main() !void {
             <span class="text-sm font-bold text-slate-900">12,842</span>
           </div>
           <div class="w-full h-10 bg-gray-50 rounded-lg border border-gray-100 flex items-end gap-px px-1 pb-1">
-            {#each [30, 45, 35, 60, 50, 70, 65, 80, 55, 75, 90, 85, 70, 95, 88, 78, 92, 85, 100, 95] as h (h)}
+            {#each [30, 45, 35, 60, 50, 70, 65, 80, 55, 75, 90, 85, 95, 88, 78, 92, 100] as h (h)}
               <div class="flex-1 bg-yellow-400/80 rounded-sm" style="height: {h}%"></div>
             {/each}
           </div>

@@ -141,10 +141,6 @@
         >
         <button
           class="px-4 py-1.5 text-sm font-semibold rounded-lg text-slate-500 hover:text-slate-900 transition-colors"
-          >Downloads</button
-        >
-        <button
-          class="px-4 py-1.5 text-sm font-semibold rounded-lg text-slate-500 hover:text-slate-900 transition-colors"
           >Name</button
         >
       </div>
@@ -185,7 +181,7 @@
             <h2
               class="text-lg font-bold text-slate-900 group-hover:text-yellow-600 transition-colors"
             >
-              {pkg.name}
+              <a href={`/packages/${pkg.name}`}>{pkg.name}</a>
             </h2>
           </div>
           <div class="flex items-center gap-1.5">
