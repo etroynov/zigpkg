@@ -1,4 +1,7 @@
 <script lang="ts">
+  import type { PageProps } from "../$types";
+  let { params }: PageProps = $props();
+
   let activeTab = $state('readme');
   let copied = $state(false);
 
@@ -11,8 +14,7 @@
   }
 </script>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
+<div class="container mx-auto">
   <div class="mb-6">
     <div class="flex flex-wrap items-center gap-3 mb-2">
       <a href="/packages" class="text-sm text-slate-400 hover:text-yellow-600 transition-colors flex items-center gap-1">
@@ -32,7 +34,7 @@
       </div>
 
       <div class="flex items-center gap-3 mt-1">
-        <a href="/" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-slate-700 hover:border-yellow-400 hover:text-yellow-700 transition-colors shadow-sm">
+        <a href="/" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-slate-700 hover:border-yellow-400 hover:text-yellow-700 transition-colors">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
           Repository
         </a>
@@ -66,11 +68,10 @@
   </div>
 
   <div class="flex flex-col lg:flex-row gap-8">
-
     <div class="flex-1 min-w-0">
 
       {#if activeTab === 'readme'}
-        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <div class="bg-white border border-gray-200 rounded-2xl p-8">
           <div class="prose prose-slate max-w-none prose-headings:font-bold prose-a:text-yellow-600 prose-a:no-underline hover:prose-a:underline prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none prose-pre:bg-slate-900 prose-pre:text-slate-100">
             {@html `
               <h1>zig-network</h1>
@@ -121,7 +122,7 @@ pub fn main() !void {
         </div>
 
       {:else if activeTab === 'versions'}
-        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm space-y-3">
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 space-y-3">
           <h2 class="text-lg font-bold text-slate-900 mb-4">Version History</h2>
           {#each [
             { version: '0.7.0', date: '2 days ago', tag: 'latest' },
@@ -148,9 +149,8 @@ pub fn main() !void {
             </div>
           {/each}
         </div>
-
-      {:else if activeTab === 'dependencies'}
-        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+        {:else if activeTab === 'dependencies'}
+        <div class="bg-white border border-gray-200 rounded-2xl p-6">
           <h2 class="text-lg font-bold text-slate-900 mb-4">Dependencies <span class="text-sm font-normal text-slate-400">(3)</span></h2>
           <div class="space-y-3">
             {#each [
@@ -170,7 +170,7 @@ pub fn main() !void {
         </div>
 
       {:else if activeTab === 'dependents'}
-        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+        <div class="bg-white border border-gray-200 rounded-2xl p-6">
           <h2 class="text-lg font-bold text-slate-900 mb-4">Dependents <span class="text-sm font-normal text-slate-400">(48)</span></h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {#each [
@@ -196,7 +196,7 @@ pub fn main() !void {
         </div>
 
       {:else if activeTab === 'code'}
-        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+        <div class="bg-white border border-gray-200 rounded-2xl p-6">
           <h2 class="text-lg font-bold text-slate-900 mb-4">Source Files</h2>
           <div class="border border-gray-100 rounded-xl overflow-hidden">
             {#each [
@@ -222,8 +222,7 @@ pub fn main() !void {
     </div>
 
     <aside class="w-full lg:w-80 shrink-0 space-y-5">
-
-      <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+      <div class="bg-white border border-gray-200 rounded-2xl p-5">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Install</h3>
         <div class="relative group">
           <div class="bg-slate-900 rounded-xl px-4 py-3 font-mono text-sm text-slate-100 overflow-x-auto">
@@ -242,7 +241,7 @@ pub fn main() !void {
         </div>
       </div>
 
-      <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-4">
+      <div class="bg-white border border-gray-200 rounded-2xl p-5 space-y-4">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Links</h3>
         <div class="space-y-2.5">
           <a href="/" class="flex items-center gap-2.5 text-sm text-slate-600 hover:text-yellow-600 transition-colors">
@@ -264,7 +263,7 @@ pub fn main() !void {
         </div>
       </div>
 
-      <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+      <div class="bg-white border border-gray-200 rounded-2xl p-5">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Stats</h3>
         <div class="space-y-3.5">
           <div class="flex items-center justify-between">
@@ -294,7 +293,7 @@ pub fn main() !void {
         </div>
       </div>
 
-      <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+      <div class="bg-white border border-gray-200 rounded-2xl p-5">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Details</h3>
         <div class="space-y-3.5">
           <div class="flex items-center justify-between">
@@ -328,7 +327,7 @@ pub fn main() !void {
         </div>
       </div>
 
-      <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+      <div class="bg-white border border-gray-200 rounded-2xl p-5">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Maintainers</h3>
         <div class="space-y-3">
           {#each [
@@ -337,14 +336,14 @@ pub fn main() !void {
             { name: 'ifreund', avatar: 'I' },
           ] as person (person.name)}
             <a href="/packages?maintainer={person.name}" class="flex items-center gap-3 group">
-              <div class="w-8 h-8 rounded-full bg-linear-to-br from-yellow-400 to-orange-400 flex items-center justify-center text-white text-xs font-bold shadow-sm">{person.avatar}</div>
+              <div class="w-8 h-8 rounded-full bg-linear-to-br from-yellow-400 to-orange-400 flex items-center justify-center text-white text-xs font-bold">{person.avatar}</div>
               <span class="text-sm font-medium text-slate-700 group-hover:text-yellow-600 transition-colors">{person.name}</span>
             </a>
           {/each}
         </div>
       </div>
 
-      <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+      <div class="bg-white border border-gray-200 rounded-2xl p-5">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Keywords</h3>
         <div class="flex flex-wrap gap-2">
           {#each ['networking', 'tcp', 'udp', 'tls', 'async', 'sockets', 'io', 'cross-platform'] as keyword (keyword)}
