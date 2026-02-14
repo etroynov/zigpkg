@@ -26,7 +26,7 @@
 
 <!-- Detailed Footer -->
 <footer class="border-t border-gray-200 bg-white pt-16 pb-12">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="container mx-auto">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
       <!-- Column 1 -->
       <div>
@@ -71,7 +71,7 @@
       <div>
         <h4 class="font-bold text-slate-900 mb-4">Legal</h4>
         <ul class="space-y-3 text-sm text-slate-500">
-          {#each links.legal as l}
+          {#each links.legal as l }
             <li>
               <a href={l.href} class="hover:text-yellow-600 transition-colors">
                 {l.label}

@@ -1,7 +1,7 @@
 <header
   class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md supports-backdrop-filter:bg-white/60"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="container mx-auto">
     <div class="flex flex-1 h-16 items-center justify-between">
       <!-- Logo & Nav -->
       <div class="flex items-center gap-8">

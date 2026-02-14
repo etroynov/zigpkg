@@ -16,7 +16,7 @@
 
 <div class="min-h-screen flex flex-col bg-[#fafafa]">
   <Header />
-  <main class="container mx-auto flex-1">
+  <main class="container mx-auto py-12">
     {@render children()}
   </main>
   <Footer />
