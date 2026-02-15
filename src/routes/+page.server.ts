@@ -4,7 +4,6 @@ import {
 	getNewPackages,
 	getRecentlyUpdated,
 	getStats,
-	getPackageCount
 } from '$lib/server/packages/queries';
 import { syncRepositories, shouldSync } from '$lib/server/github/sync';
 

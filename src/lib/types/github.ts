@@ -40,3 +40,19 @@ export interface GitHubLicense {
 	name: string;
 	spdx_id: string;
 }
+
+export interface GitHubTag {
+	name: string;
+	commit: {
+		sha: string;
+		url: string;
+	};
+}
+
+export interface GitHubContent {
+	name: string;
+	path: string;
+	type: 'file' | 'dir' | 'symlink' | 'submodule';
+	size: number;
+	html_url: string;
+}

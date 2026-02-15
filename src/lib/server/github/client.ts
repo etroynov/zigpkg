@@ -1,4 +1,9 @@
-import type { GitHubSearchResponse, GitHubRepository } from '$lib/types/github';
+import type {
+	GitHubSearchResponse,
+	GitHubRepository,
+	GitHubTag,
+	GitHubContent
+} from '$lib/types/github';
 import { env } from '$env/dynamic/private';
 import { GitHubAPIError, RateLimitError } from './errors';
 
@@ -107,6 +112,81 @@ export class GitHubClient {
 
 		const tags: { name: string }[] = await response.json();
 		return tags.length > 0 ? tags[0].name : null;
+	}
+
+	async getReadme(owner: string, repo: string): Promise<string | null> {
+		if (this.rateLimitRemaining <= 1 && Date.now() < this.rateLimitReset * 1000) {
+			return null;
+		}
+
+		const url = `${GITHUB_API_BASE}/repos/${owner}/${repo}/readme`;
+		const response = await fetch(url, {
+			headers: {
+				...this.getHeaders(),
+				Accept: 'application/vnd.github.html+json'
+			}
+		});
+
+		this.rateLimitRemaining = parseInt(response.headers.get('X-RateLimit-Remaining') || '30');
+		this.rateLimitReset = parseInt(response.headers.get('X-RateLimit-Reset') || '0');
+
+		if (!response.ok) return null;
+
+		return response.text();
+	}
+
+	async getTags(owner: string, repo: string): Promise<GitHubTag[] | null> {
+		if (this.rateLimitRemaining <= 1 && Date.now() < this.rateLimitReset * 1000) {
+			return null;
+		}
+
+		const url = `${GITHUB_API_BASE}/repos/${owner}/${repo}/tags?per_page=100`;
+		const response = await fetch(url, { headers: this.getHeaders() });
+
+		this.rateLimitRemaining = parseInt(response.headers.get('X-RateLimit-Remaining') || '30');
+		this.rateLimitReset = parseInt(response.headers.get('X-RateLimit-Reset') || '0');
+
+		if (!response.ok) return null;
+
+		return response.json();
+	}
+
+	async getContents(owner: string, repo: string, path: string = ''): Promise<GitHubContent[] | null> {
+		if (this.rateLimitRemaining <= 1 && Date.now() < this.rateLimitReset * 1000) {
+			return null;
+		}
+
+		const url = `${GITHUB_API_BASE}/repos/${owner}/${repo}/contents/${path}`;
+		const response = await fetch(url, { headers: this.getHeaders() });
+
+		this.rateLimitRemaining = parseInt(response.headers.get('X-RateLimit-Remaining') || '30');
+		this.rateLimitReset = parseInt(response.headers.get('X-RateLimit-Reset') || '0');
+
+		if (!response.ok) return null;
+
+		const data = await response.json();
+		return Array.isArray(data) ? data : null;
+	}
+
+	async getFileContent(owner: string, repo: string, path: string): Promise<string | null> {
+		if (this.rateLimitRemaining <= 1 && Date.now() < this.rateLimitReset * 1000) {
+			return null;
+		}
+
+		const url = `${GITHUB_API_BASE}/repos/${owner}/${repo}/contents/${path}`;
+		const response = await fetch(url, {
+			headers: {
+				...this.getHeaders(),
+				Accept: 'application/vnd.github.raw+json'
+			}
+		});
+
+		this.rateLimitRemaining = parseInt(response.headers.get('X-RateLimit-Remaining') || '30');
+		this.rateLimitReset = parseInt(response.headers.get('X-RateLimit-Reset') || '0');
+
+		if (!response.ok) return null;
+
+		return response.text();
 	}
 
 	getRateLimitStatus() {

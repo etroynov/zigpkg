@@ -17,8 +17,6 @@ function getSortColumn(sort: SortOption) {
 	switch (sort) {
 		case 'stars':
 			return desc(packages.stars);
-		case 'updated':
-			return desc(packages.pushedAt);
 		case 'new':
 			return desc(packages.createdAt);
 		case 'name':
