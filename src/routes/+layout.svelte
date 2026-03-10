@@ -11,7 +11,7 @@
 
 <svelte:head>
   <link rel="icon" href={favicon} />
-  <title>zigpkg - The package manager for Zig</title>
+  <title>Zig Package Registry — Find & Share Zig Libraries</title>
 </svelte:head>
 
 <div class="min-h-screen flex flex-col bg-[#fafafa]">
