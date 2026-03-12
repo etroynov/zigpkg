@@ -11,6 +11,7 @@ interface QueryOptions {
 	sort?: SortOption;
 	packageType?: PackageType;
 	search?: string;
+	letter?: string;
 }
 
 function getSortColumn(sort: SortOption) {
@@ -26,9 +27,8 @@ function getSortColumn(sort: SortOption) {
 	}
 }
 
-export async function getPackages(options: QueryOptions = {}) {
-	const { limit = 20, offset = 0, sort = 'stars', packageType, search } = options;
-
+function buildConditions(options: QueryOptions) {
+	const { packageType, search, letter } = options;
 	const conditions = [];
 
 	if (packageType) {
@@ -41,6 +41,17 @@ export async function getPackages(options: QueryOptions = {}) {
 		);
 	}
 
+	if (letter) {
+		conditions.push(ilike(packages.name, `${letter}%`));
+	}
+
+	return conditions;
+}
+
+export async function getPackages(options: QueryOptions = {}) {
+	const { limit = 20, offset = 0, sort = 'stars' } = options;
+
+	const conditions = buildConditions(options);
 	const query = db.select().from(packages).orderBy(getSortColumn(sort)).limit(limit).offset(offset);
 
 	if (conditions.length > 0) {
@@ -48,6 +59,18 @@ export async function getPackages(options: QueryOptions = {}) {
 	}
 
 	return query;
+}
+
+export async function getFilteredPackageCount(options: QueryOptions = {}): Promise<number> {
+	const conditions = buildConditions(options);
+
+	const query = db.select({ count: sql<number>`count(*)::int` }).from(packages);
+
+	const [result] = conditions.length > 0
+		? await query.where(and(...conditions))
+		: await query;
+
+	return result?.count ?? 0;
 }
 
 export async function getMostPopular(limit = 6) {

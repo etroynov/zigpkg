@@ -1,6 +1,14 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { Input } from '$lib/components/ui';
 	import { Button } from '$lib/components/ui';
+
+	let query = $state('');
+
+	function handleSearch(e: Event) {
+		e.preventDefault();
+		goto('/search?q=' + encodeURIComponent(query));
+	}
 </script>
 
 <section class="py-20 md:py-32">
@@ -17,13 +25,14 @@
 				Find, publish, and manage Zig packages. The official package registry for the Zig ecosystem.
 			</p>
 			<div class="mt-10 w-full max-w-xl">
-				<form class="flex gap-2">
+				<form onsubmit={handleSearch} class="flex gap-2">
 					<Input
+						bind:value={query}
 						type="search"
 						placeholder="Search packages..."
 						class="h-12 text-lg"
 					/>
-					<Button size="lg" class="h-12 px-8">
+					<Button type="submit" variant="brand" size="lg" class="h-12 px-8">
 						Search
 					</Button>
 				</form>

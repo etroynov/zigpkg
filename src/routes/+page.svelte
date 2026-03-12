@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
   import { formatNumber } from "$lib/utils/formatNumber";
   import { SvelteSet } from "svelte/reactivity";
 
@@ -18,6 +19,12 @@
   });
 
   let copiedPkg = $state<string | null>(null);
+  let searchQuery = $state('');
+
+  function handleSearch(e: Event) {
+    e.preventDefault();
+    goto('/search?q=' + encodeURIComponent(searchQuery));
+  }
 
   async function copyFetchCommand(
     owner: string,
@@ -107,30 +114,39 @@
     class="flex flex-col md:flex-row gap-4 mb-8 items-center justify-between"
   >
     <!-- Search -->
-    <div class="relative w-full md:max-w-md group">
-      <div
-        class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
-      >
-        <svg
-          class="h-5 w-5 text-slate-400 group-focus-within:text-yellow-500 transition-colors"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+    <form onsubmit={handleSearch} class="relative w-full md:max-w-md group flex">
+      <div class="relative flex-1">
+        <div
+          class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
+          <svg
+            class="h-5 w-5 text-slate-400 group-focus-within:text-yellow-500 transition-colors"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </div>
+        <input
+          bind:value={searchQuery}
+          type="search"
+          placeholder="Search a package..."
+          class="block w-full pl-12 pr-4 py-3 border border-gray-200 rounded-l-xl bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
+        />
       </div>
-      <input
-        type="text"
-        placeholder="Search a package..."
-        class="block w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
-      />
-    </div>
+      <button
+        type="submit"
+        class="px-5 py-3 rounded-r-xl bg-yellow-400 text-slate-900 font-semibold hover:bg-yellow-500 transition-colors shrink-0"
+      >
+        Search
+      </button>
+    </form>
 
     <!-- Sorting Controls -->
     <div class="flex items-center gap-3 w-full md:w-auto">

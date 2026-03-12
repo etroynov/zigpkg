@@ -1,3 +1,14 @@
+<script lang="ts">
+  import { goto } from '$app/navigation';
+
+  let query = $state('');
+
+  function handleSearch(e: Event) {
+    e.preventDefault();
+    goto('/search?q=' + encodeURIComponent(query));
+  }
+</script>
+
 <header
   class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md supports-backdrop-filter:bg-white/60"
 >
@@ -15,7 +26,33 @@
             >packages</span
           >
         </a>
+        <a href="/packages/" class="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+          Packages
+        </a>
       </div>
+
+      <!-- Search -->
+      <form onsubmit={handleSearch} class="hidden md:flex items-center gap-2 flex-1 max-w-sm mx-8">
+        <div class="relative flex-1">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input
+            bind:value={query}
+            type="search"
+            placeholder="Search packages..."
+            class="block w-full pl-9 pr-3 py-2 border border-gray-200 rounded-xl bg-white text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
+          />
+        </div>
+        <button
+          type="submit"
+          class="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 text-sm font-semibold hover:bg-yellow-500 transition-colors shrink-0"
+        >
+          Search
+        </button>
+      </form>
 
       <!-- Right Side: Socials & Theme Toggle -->
       <div class="flex items-center gap-4">
