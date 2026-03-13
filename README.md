@@ -1,38 +1,53 @@
-# sv
+# zigpkg.dev
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Open source package registry for the [Zig](https://ziglang.org/) programming language.
 
-## Creating a project
+Browse, search, and discover Zig libraries and applications at [zigpkg.dev](https://zigpkg.dev).
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Stack
 
-```sh
-# create a new project in the current directory
-npx sv create
+- [SvelteKit](https://kit.svelte.dev/) — framework
+- [Drizzle ORM](https://orm.drizzle.team/) + PostgreSQL — database
+- [Bun](https://bun.sh/) — runtime & package manager
 
-# create a new project in my-app
-npx sv create my-app
-```
+## Getting Started
 
-## Developing
+### Prerequisites
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- [Bun](https://bun.sh/) >= 1.0
+- PostgreSQL database
 
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
+### Install
 
 ```sh
-npm run build
+bun install
 ```
 
-You can preview the production build with `npm run preview`.
+### Environment
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Create `.env` and set the required variables:
+
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/zigpkg
+```
+
+### Develop
+
+```sh
+bun run dev
+```
+
+### Build
+
+```sh
+bun run build
+bun run preview
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first.
+
+## License
+
+MIT
