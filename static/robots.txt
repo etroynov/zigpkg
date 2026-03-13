@@ -1,3 +1,5 @@
-# allow crawling everything by default
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /search
+
+Sitemap: https://zigpkg.dev/sitemap.xml
