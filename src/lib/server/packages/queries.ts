@@ -106,6 +106,10 @@ export async function getStats() {
 	return result;
 }
 
+export async function getAllPackageNames() {
+	return db.select({ name: packages.name, updatedAt: packages.updatedAt }).from(packages);
+}
+
 export async function getPackageCount() {
 	const [result] = await db
 		.select({

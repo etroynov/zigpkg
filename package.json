@@ -46,11 +46,12 @@
     "@radix-ui/react-slot": "^1.2.4",
     "bits-ui": "^2.15.4",
     "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "drizzle-kit": "^0.31.8",
     "drizzle-orm": "^0.45.0",
-    "clsx": "^2.1.1",
     "lucide-react": "^0.563.0",
     "postgres": "^3.4.7",
+    "sitemap": "^9.0.1",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.2.2"
   }
