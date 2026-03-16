@@ -13,7 +13,7 @@
 		forks: number;
 	}
 
-	let { name, fullName, version, packageType, description, stars, forks }: Props = $props();
+	let { fullName, version, packageType, description, stars, forks }: Props = $props();
 </script>
 
 <div class="flex items-start gap-4 px-4 py-4 bg-card hover:bg-accent/30 transition-colors">

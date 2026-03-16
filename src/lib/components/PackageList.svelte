@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PackageCard from './PackageCard.svelte';
+	import PackageListCard from './PackageListCard.svelte';
 
 	interface Package {
 		name: string;
@@ -31,7 +31,7 @@
 		</div>
 		<div class="grid md:grid-cols-2 gap-4">
 			{#each packages as pkg}
-				<PackageCard {...pkg} />
+				<PackageListCard {...pkg} />
 			{/each}
 		</div>
 	</div>
