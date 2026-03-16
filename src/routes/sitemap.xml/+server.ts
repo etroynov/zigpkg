@@ -13,7 +13,7 @@ export const GET: RequestHandler = async () => {
     const pkgs = await getAllPackageNames();
     for (const pkg of pkgs) {
       smStream.write({
-        url: `/packages/${encodeURIComponent(pkg.name)}`,
+        url: `/packages/${pkg.fullName}`,
         lastmod: new Date(pkg.updatedAt).toISOString(),
       });
     }

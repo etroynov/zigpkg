@@ -9,26 +9,35 @@ import (
 )
 
 type Package struct {
-	ID             int32
-	GithubID       int32
-	Name           string
-	FullName       string
-	Owner          string
-	OwnerAvatarUrl pgtype.Text
-	Description    pgtype.Text
-	Version        pgtype.Text
-	Stars          int32
-	Forks          int32
-	OpenIssues     int32
-	License        pgtype.Text
-	Homepage       pgtype.Text
-	RepositoryUrl  string
-	Topics         pgtype.Text
-	PackageType    string
-	CreatedAt      pgtype.Timestamptz
-	UpdatedAt      pgtype.Timestamptz
-	PushedAt       pgtype.Timestamptz
-	CachedAt       pgtype.Timestamptz
+	ID            int32
+	GithubID      int64
+	Name          string
+	FullName      string
+	OwnerID       int32
+	Description   pgtype.Text
+	Version       pgtype.Text
+	Stars         int32
+	Forks         int32
+	OpenIssues    int32
+	License       pgtype.Text
+	Homepage      pgtype.Text
+	RepositoryUrl string
+	Topics        pgtype.Text
+	PackageType   string
+	CreatedAt     pgtype.Timestamptz
+	UpdatedAt     pgtype.Timestamptz
+	PushedAt      pgtype.Timestamptz
+	CachedAt      pgtype.Timestamptz
+}
+
+type PackageContent struct {
+	ID         int32
+	PackageID  int32
+	Readme     pgtype.Text
+	Tags       []byte
+	Files      []byte
+	ZonContent pgtype.Text
+	LastSync   pgtype.Timestamptz
 }
 
 type SyncMetadatum struct {
@@ -37,4 +46,15 @@ type SyncMetadatum struct {
 	LastSyncAt pgtype.Timestamptz
 	TotalCount pgtype.Int4
 	NextSyncAt pgtype.Timestamptz
+}
+
+type User struct {
+	ID        int32
+	GithubID  int64
+	Username  string
+	AvatarUrl pgtype.Text
+	Bio       pgtype.Text
+	HtmlUrl   pgtype.Text
+	CreatedAt pgtype.Timestamptz
+	UpdatedAt pgtype.Timestamptz
 }

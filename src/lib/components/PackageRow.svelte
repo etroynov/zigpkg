@@ -5,6 +5,7 @@
 
 	interface Props {
 		name: string;
+		fullName: string;
 		version: string;
 		packageType: string;
 		description: string | null;
@@ -12,7 +13,7 @@
 		forks: number;
 	}
 
-	let { name, version, packageType, description, stars, forks }: Props = $props();
+	let { name, fullName, version, packageType, description, stars, forks }: Props = $props();
 </script>
 
 <div class="flex items-start gap-4 px-4 py-4 bg-card hover:bg-accent/30 transition-colors">
@@ -54,10 +55,10 @@
 	<div class="flex-1 min-w-0">
 		<div class="flex items-center flex-wrap gap-2 mb-1">
 			<a
-				href={resolve(`/packages/${name}`)}
+				href={resolve(`/packages/${fullName}`)}
 				class="font-semibold text-foreground hover:text-primary transition-colors"
 			>
-				{name}
+				{fullName}
 			</a>
 			<Badge variant="outline" class="text-xs">{version}</Badge>
 			<Badge variant="secondary" class="text-xs capitalize">{packageType}</Badge>

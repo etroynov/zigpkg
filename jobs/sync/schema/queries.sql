@@ -1,16 +1,28 @@
+-- name: UpsertUser :one
+INSERT INTO users (github_id, username, avatar_url, bio, html_url, updated_at)
+VALUES ($1, $2, $3, $4, $5, now())
+ON CONFLICT (github_id) DO UPDATE SET
+  username   = EXCLUDED.username,
+  avatar_url = EXCLUDED.avatar_url,
+  bio        = EXCLUDED.bio,
+  html_url   = EXCLUDED.html_url,
+  updated_at = now()
+RETURNING id;
+
 -- name: UpsertPackage :exec
 INSERT INTO packages (
-  github_id, name, full_name, owner, owner_avatar_url,
+  github_id, name, full_name, owner_id,
   description, version, stars, forks, open_issues,
   license, homepage, repository_url, topics,
   package_type, created_at, updated_at, pushed_at, cached_at
 ) VALUES (
-  $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
-  $11, $12, $13, $14, $15, $16, $17, $18, now()
+  $1, $2, $3, $4, $5, $6, $7, $8, $9,
+  $10, $11, $12, $13, $14, $15, $16, $17, now()
 )
 ON CONFLICT (github_id) DO UPDATE SET
   name           = EXCLUDED.name,
   full_name      = EXCLUDED.full_name,
+  owner_id       = EXCLUDED.owner_id,
   description    = EXCLUDED.description,
   version        = EXCLUDED.version,
   stars          = EXCLUDED.stars,

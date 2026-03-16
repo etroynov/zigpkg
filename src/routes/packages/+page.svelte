@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { resolve } from '$app/paths';
 	import PackageRow from '$lib/components/PackageRow.svelte';
 
 	let { data } = $props();
@@ -40,7 +39,7 @@
 		if (letter) p.set('letter', letter);
 
 		const qs = p.toString();
-		return resolve(`/packages${qs ? '?' + qs : ''}`);
+		return `/packages${qs ? '?' + qs : ''}`;
 	}
 
 	function navigate(params: { page?: number; sort?: string; letter?: string | null }) {

@@ -1,10 +1,20 @@
+CREATE TABLE users (
+  id serial PRIMARY KEY,
+  github_id bigint NOT NULL UNIQUE,
+  username varchar(255) NOT NULL UNIQUE,
+  avatar_url text,
+  bio text,
+  html_url text,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now()
+);
+
 CREATE TABLE packages (
   id serial PRIMARY KEY,
-  github_id integer NOT NULL UNIQUE,
+  github_id bigint NOT NULL UNIQUE,
   name varchar(255) NOT NULL,
   full_name varchar(512) NOT NULL,
-  owner varchar(255) NOT NULL,
-  owner_avatar_url text,
+  owner_id integer NOT NULL REFERENCES users(id),
   description text,
   version varchar(50) DEFAULT 'latest',
   stars integer NOT NULL DEFAULT 0,
@@ -19,6 +29,16 @@ CREATE TABLE packages (
   updated_at timestamptz NOT NULL,
   pushed_at timestamptz NOT NULL,
   cached_at timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE TABLE package_content (
+  id serial PRIMARY KEY,
+  package_id integer NOT NULL UNIQUE REFERENCES packages(id) ON DELETE CASCADE,
+  readme text,
+  tags jsonb,
+  files jsonb,
+  zon_content text,
+  last_sync timestamptz
 );
 
 CREATE TABLE sync_metadata (

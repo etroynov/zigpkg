@@ -37,6 +37,9 @@ RUN apk add --no-cache tini curl && \
 COPY --from=prod-deps --chown=app:app /app/node_modules ./node_modules
 COPY --from=builder --chown=app:app /app/build ./build
 COPY --from=builder --chown=app:app /app/package.json ./
+COPY --from=builder --chown=app:app /app/drizzle ./drizzle
+COPY --from=builder --chown=app:app /app/drizzle.config.ts ./
+COPY --from=builder --chown=app:app /app/scripts ./scripts
 
 USER app
 EXPOSE 3200
@@ -45,4 +48,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
   CMD curl -f http://localhost:3200/ || exit 1
 
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["bun", "./build/index.js"]
+CMD ["sh", "-c", "bun scripts/db-create.ts && bun run db:migrate && bun ./build/index.js"]

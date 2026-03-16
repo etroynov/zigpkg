@@ -32,17 +32,18 @@ func (q *Queries) GetSyncMetadata(ctx context.Context, topic string) (SyncMetada
 
 const upsertPackage = `-- name: UpsertPackage :exec
 INSERT INTO packages (
-  github_id, name, full_name, owner, owner_avatar_url,
+  github_id, name, full_name, owner_id,
   description, version, stars, forks, open_issues,
   license, homepage, repository_url, topics,
   package_type, created_at, updated_at, pushed_at, cached_at
 ) VALUES (
-  $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
-  $11, $12, $13, $14, $15, $16, $17, $18, now()
+  $1, $2, $3, $4, $5, $6, $7, $8, $9,
+  $10, $11, $12, $13, $14, $15, $16, $17, now()
 )
 ON CONFLICT (github_id) DO UPDATE SET
   name           = EXCLUDED.name,
   full_name      = EXCLUDED.full_name,
+  owner_id       = EXCLUDED.owner_id,
   description    = EXCLUDED.description,
   version        = EXCLUDED.version,
   stars          = EXCLUDED.stars,
@@ -57,24 +58,23 @@ ON CONFLICT (github_id) DO UPDATE SET
 `
 
 type UpsertPackageParams struct {
-	GithubID       int32
-	Name           string
-	FullName       string
-	Owner          string
-	OwnerAvatarUrl pgtype.Text
-	Description    pgtype.Text
-	Version        pgtype.Text
-	Stars          int32
-	Forks          int32
-	OpenIssues     int32
-	License        pgtype.Text
-	Homepage       pgtype.Text
-	RepositoryUrl  string
-	Topics         pgtype.Text
-	PackageType    string
-	CreatedAt      pgtype.Timestamptz
-	UpdatedAt      pgtype.Timestamptz
-	PushedAt       pgtype.Timestamptz
+	GithubID      int64
+	Name          string
+	FullName      string
+	OwnerID       int32
+	Description   pgtype.Text
+	Version       pgtype.Text
+	Stars         int32
+	Forks         int32
+	OpenIssues    int32
+	License       pgtype.Text
+	Homepage      pgtype.Text
+	RepositoryUrl string
+	Topics        pgtype.Text
+	PackageType   string
+	CreatedAt     pgtype.Timestamptz
+	UpdatedAt     pgtype.Timestamptz
+	PushedAt      pgtype.Timestamptz
 }
 
 func (q *Queries) UpsertPackage(ctx context.Context, arg UpsertPackageParams) error {
@@ -82,8 +82,7 @@ func (q *Queries) UpsertPackage(ctx context.Context, arg UpsertPackageParams) er
 		arg.GithubID,
 		arg.Name,
 		arg.FullName,
-		arg.Owner,
-		arg.OwnerAvatarUrl,
+		arg.OwnerID,
 		arg.Description,
 		arg.Version,
 		arg.Stars,
@@ -118,4 +117,37 @@ type UpsertSyncMetadataParams struct {
 func (q *Queries) UpsertSyncMetadata(ctx context.Context, arg UpsertSyncMetadataParams) error {
 	_, err := q.db.Exec(ctx, upsertSyncMetadata, arg.Topic, arg.TotalCount)
 	return err
+}
+
+const upsertUser = `-- name: UpsertUser :one
+INSERT INTO users (github_id, username, avatar_url, bio, html_url, updated_at)
+VALUES ($1, $2, $3, $4, $5, now())
+ON CONFLICT (github_id) DO UPDATE SET
+  username   = EXCLUDED.username,
+  avatar_url = EXCLUDED.avatar_url,
+  bio        = EXCLUDED.bio,
+  html_url   = EXCLUDED.html_url,
+  updated_at = now()
+RETURNING id
+`
+
+type UpsertUserParams struct {
+	GithubID  int64
+	Username  string
+	AvatarUrl pgtype.Text
+	Bio       pgtype.Text
+	HtmlUrl   pgtype.Text
+}
+
+func (q *Queries) UpsertUser(ctx context.Context, arg UpsertUserParams) (int32, error) {
+	row := q.db.QueryRow(ctx, upsertUser,
+		arg.GithubID,
+		arg.Username,
+		arg.AvatarUrl,
+		arg.Bio,
+		arg.HtmlUrl,
+	)
+	var id int32
+	err := row.Scan(&id)
+	return id, err
 }

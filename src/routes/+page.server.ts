@@ -32,6 +32,7 @@ export const load: PageServerLoad = async ({ setHeaders }) => {
 	return {
 		popularPackages: popularPackages.map((pkg) => ({
 			name: pkg.name,
+			fullName: pkg.fullName,
 			owner: pkg.owner,
 			description: pkg.description || '',
 			version: pkg.version || 'latest',
@@ -41,6 +42,7 @@ export const load: PageServerLoad = async ({ setHeaders }) => {
 		})),
 		newPackages: newPackages.map((pkg) => ({
 			name: pkg.name,
+			fullName: pkg.fullName,
 			owner: pkg.owner,
 			description: pkg.description || '',
 			version: pkg.version || 'latest',
@@ -51,6 +53,7 @@ export const load: PageServerLoad = async ({ setHeaders }) => {
 		})),
 		recentlyUpdated: recentlyUpdated.map((pkg) => ({
 			name: pkg.name,
+			fullName: pkg.fullName,
 			owner: pkg.owner,
 			description: pkg.description || '',
 			version: pkg.version || 'latest',

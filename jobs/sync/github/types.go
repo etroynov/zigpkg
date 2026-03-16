@@ -60,8 +60,9 @@ type Repo struct {
 }
 
 type Owner struct {
-	Login     string `json:"login"`
-	AvatarURL string `json:"avatarUrl"`
+	DatabaseID int64  `json:"databaseId"`
+	Login      string `json:"login"`
+	AvatarURL  string `json:"avatarUrl"`
 }
 
 // Topics returns the list of topic names for a repo.

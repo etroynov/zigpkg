@@ -31,6 +31,7 @@ export const load: PageServerLoad = async ({ url, setHeaders }) => {
 		packages: pkgs.map((pkg) => ({
 			id: pkg.id,
 			name: pkg.name,
+			fullName: pkg.fullName,
 			owner: pkg.owner,
 			description: pkg.description ?? '',
 			version: pkg.version ?? 'latest',

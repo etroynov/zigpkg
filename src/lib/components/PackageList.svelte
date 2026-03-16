@@ -3,6 +3,7 @@
 
 	interface Package {
 		name: string;
+		fullName: string;
 		description: string;
 		version: string;
 		downloads?: string;

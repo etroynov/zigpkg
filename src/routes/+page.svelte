@@ -12,8 +12,8 @@
       ...data.newPackages,
       ...data.recentlyUpdated,
     ].filter((pkg) => {
-      if (seen.has(pkg.name)) return false;
-      seen.add(pkg.name);
+      if (seen.has(pkg.fullName)) return false;
+      seen.add(pkg.fullName);
       return true;
     });
   });
@@ -183,7 +183,7 @@
 
   <!-- Packages Grid -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {#each allPackages as pkg (pkg.name)}
+    {#each allPackages as pkg (pkg.fullName)}
       <div
         class="group relative flex flex-col bg-white border border-gray-200 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-yellow-500/10 hover:border-yellow-400/50"
       >
@@ -197,7 +197,7 @@
             <h2
               class="text-lg font-bold text-slate-900 group-hover:text-yellow-600 transition-colors"
             >
-              <a href={`/packages/${pkg.name}`}>{pkg.name}</a>
+              <a href={`/packages/${pkg.fullName}`}>{pkg.fullName}</a>
             </h2>
           </div>
           <div class="flex items-center gap-1.5">

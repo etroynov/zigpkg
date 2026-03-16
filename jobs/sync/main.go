@@ -90,25 +90,34 @@ func syncTopic(ctx context.Context, q *db.Queries, client *gh.Client, topic, pkg
 
 			topicsJSON, _ := json.Marshal(repo.Topics())
 
+			ownerID, err := q.UpsertUser(ctx, db.UpsertUserParams{
+				GithubID:  int64(repo.Owner.DatabaseID),
+				Username:  repo.Owner.Login,
+				AvatarUrl: pgtype.Text{String: repo.Owner.AvatarURL, Valid: true},
+			})
+			if err != nil {
+				log.Printf("  upsert user failed %s: %v", repo.Owner.Login, err)
+				continue
+			}
+
 			params := db.UpsertPackageParams{
-				GithubID:       int32(repo.DatabaseID),
-				Name:           repo.Name,
-				FullName:       repo.NameWithOwner,
-				Owner:          repo.Owner.Login,
-				OwnerAvatarUrl: pgtype.Text{String: repo.Owner.AvatarURL, Valid: true},
-				Description:    nullText(repo.Description),
-				Version:        pgtype.Text{String: version, Valid: true},
-				Stars:          repo.StargazerCount,
-				Forks:          repo.ForkCount,
-				OpenIssues:     repo.Issues.TotalCount,
-				License:        nullText(repo.License()),
-				Homepage:       nullText(repo.HomepageURL),
-				RepositoryUrl:  repo.URL,
-				Topics:         pgtype.Text{String: string(topicsJSON), Valid: true},
-				PackageType:    pkgType,
-				CreatedAt:      parseTime(repo.CreatedAt),
-				UpdatedAt:      parseTime(repo.UpdatedAt),
-				PushedAt:       parseTime(repo.PushedAt),
+				GithubID:      int64(repo.DatabaseID),
+				Name:          repo.Name,
+				FullName:      repo.NameWithOwner,
+				OwnerID:       ownerID,
+				Description:   nullText(repo.Description),
+				Version:       pgtype.Text{String: version, Valid: true},
+				Stars:         repo.StargazerCount,
+				Forks:         repo.ForkCount,
+				OpenIssues:    repo.Issues.TotalCount,
+				License:       nullText(repo.License()),
+				Homepage:      nullText(repo.HomepageURL),
+				RepositoryUrl: repo.URL,
+				Topics:        pgtype.Text{String: string(topicsJSON), Valid: true},
+				PackageType:   pkgType,
+				CreatedAt:     parseTime(repo.CreatedAt),
+				UpdatedAt:     parseTime(repo.UpdatedAt),
+				PushedAt:      parseTime(repo.PushedAt),
 			}
 
 			if err := q.UpsertPackage(ctx, params); err != nil {

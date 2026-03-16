@@ -3,23 +3,24 @@
 
 	interface Props {
 		name: string;
+		fullName: string;
 		description: string;
 		version: string;
 		downloads?: string;
 		isNew?: boolean;
 	}
 
-	let { name, description, version, downloads, isNew = false }: Props = $props();
+	let { name, fullName, description, version, downloads, isNew = false }: Props = $props();
 </script>
 
 <a
-	href="/packages/{name}"
+	href="/packages/{fullName}"
 	class="block p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
 >
 	<div class="flex items-start justify-between gap-2">
 		<div class="min-w-0 flex-1">
 			<div class="flex items-center gap-2">
-				<h3 class="font-semibold text-foreground truncate">{name}</h3>
+				<h3 class="font-semibold text-foreground truncate">{fullName}</h3>
 				{#if isNew}
 					<Badge variant="secondary" class="text-xs">New</Badge>
 				{/if}

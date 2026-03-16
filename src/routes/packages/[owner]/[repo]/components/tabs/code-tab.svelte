@@ -4,7 +4,7 @@
   let {
     files,
   }: {
-    files: { name: string; path: string; type: string; size: number; htmlUrl: string }[];
+    files: { name: string; path: string; type: string; size: number; htmlUrl: string | null }[];
   } = $props();
 </script>
 
@@ -14,7 +14,7 @@
     <div class="border border-gray-100 rounded-xl overflow-hidden">
       {#each files as item (item.path)}
         <a
-          href={item.htmlUrl}
+          href={item.htmlUrl ?? '#'}
           target="_blank"
           rel="noopener"
           class="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 transition-colors border-t border-gray-100 first:border-t-0"

@@ -25,7 +25,7 @@ query($query: String!, $after: String) {
         databaseId
         name
         nameWithOwner
-        owner { login avatarUrl }
+        owner { databaseId login avatarUrl }
         description
         url
         homepageUrl
