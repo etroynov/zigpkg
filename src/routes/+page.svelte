@@ -3,6 +3,7 @@
   import { formatNumber } from "$lib/utils/formatNumber";
   import { SvelteSet } from "svelte/reactivity";
   import PackageCard from '$lib/components/PackageCard.svelte';
+  import { Search, ArrowUpNarrowWide } from 'lucide-svelte';
 
   let { data } = $props();
 
@@ -85,19 +86,7 @@
         <div
           class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
         >
-          <svg
-            class="h-5 w-5 text-slate-400 group-focus-within:text-yellow-500 transition-colors"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
+          <Search class="h-5 w-5 text-slate-400 group-focus-within:text-yellow-500 transition-colors" />
         </div>
         <input
           bind:value={searchQuery}
@@ -130,19 +119,7 @@
       <button
         class="p-2.5 bg-white border border-gray-200 rounded-xl text-slate-500 hover:text-slate-900 hover:border-gray-300 transition-colors shadow-sm"
       >
-        <svg
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
-          />
-        </svg>
+        <ArrowUpNarrowWide class="h-6 w-6" />
       </button>
     </div>
   </div>
@@ -155,7 +132,7 @@
   </div>
 
   <!-- Community Section / Footer Extension -->
-  <div class="mt-20 py-16 text-center">
+  <div class="py-16 text-center">
     <h3 class="text-slate-900 font-bold mb-4 text-2xl">Join the Community</h3>
     <p class="text-slate-500 mb-8 max-w-lg mx-auto text-lg">
       Contribute to our packages, report issues, and help us grow the Zig
