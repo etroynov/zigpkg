@@ -14,7 +14,7 @@ var graphqlURL = "https://api.github.com/graphql"
 
 const searchQuery = `
 query($query: String!, $after: String) {
-  search(query: $query, type: REPOSITORY, first: 100, after: $after) {
+  search(query: $query, type: REPOSITORY, first: 25, after: $after) {
     repositoryCount
     pageInfo {
       endCursor
