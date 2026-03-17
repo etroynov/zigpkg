@@ -11,6 +11,14 @@
 
 <svelte:head>
   <link rel="icon" href={favicon} />
+  <link rel="canonical" href={page.url.origin + page.url.pathname} />
+  {#each locales as locale}
+    <link
+      rel="alternate"
+      hreflang={locale}
+      href={page.url.origin + localizeHref(page.url.pathname, { locale })}
+    />
+  {/each}
   <title>Zig Package Registry — Find & Share Zig Libraries</title>
 </svelte:head>
 
